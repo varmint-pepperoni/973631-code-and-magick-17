@@ -7,6 +7,7 @@ var COAT_COLORS = [
   'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'
 ];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var CHARACTERS_COUNT = 4;
 
 var generateCharacter = function () {
@@ -108,6 +109,10 @@ var setupWizardEyesClickHandler = function () {
   elSetupWizardEyes.style.fill = getRandomArrValue(EYES_COLORS);
 };
 
+var setupWizardFireballClickHandler = function () {
+  elSetupWizardFireball.style.background = getRandomArrValue(FIREBALL_COLORS);
+};
+
 var openSetup = function () {
   if (!isSetupOpened()) {
     elSetup.classList.remove('hidden');
@@ -118,6 +123,7 @@ var openSetup = function () {
     elSetupForm.addEventListener('submit', setupFormSubmitHandler);
     elSetupWizardCoat.addEventListener('click', setupWizardCoatClickHandler);
     elSetupWizardEyes.addEventListener('click', setupWizardEyesClickHandler);
+    elSetupWizardFireball.addEventListener('click', setupWizardFireballClickHandler);
   }
 };
 
@@ -131,6 +137,7 @@ var closeSetup = function () {
     elSetupForm.removeEventListener('submit', setupFormSubmitHandler);
     elSetupWizardCoat.removeEventListener('click', setupWizardCoatClickHandler);
     elSetupWizardEyes.removeEventListener('click', setupWizardEyesClickHandler);
+    elSetupWizardFireball.removeEventListener('click', setupWizardFireballClickHandler);
   }
 };
 
@@ -146,6 +153,7 @@ var elSetup = document.querySelector('.setup');
 var elSetupWizard = elSetup.querySelector('.setup-wizard');
 var elSetupWizardCoat = elSetupWizard.querySelector('.wizard-coat');
 var elSetupWizardEyes = elSetupWizard.querySelector('.wizard-eyes');
+var elSetupWizardFireball = elSetup.querySelector('.setup-fireball-wrap');
 var elSetupOpen = document.querySelector('.setup-open');
 var elSetupClose = elSetup.querySelector('.setup-close');
 var elSetupOpenIcon = elSetupOpen.querySelector('.setup-open-icon');
