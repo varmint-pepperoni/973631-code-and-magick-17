@@ -104,6 +104,10 @@ var setupWizardCoatClickHandler = function () {
   elSetupWizardCoat.style.fill = getRandomArrValue(COAT_COLORS);
 };
 
+var setupWizardEyesClickHandler = function () {
+  elSetupWizardEyes.style.fill = getRandomArrValue(EYES_COLORS);
+};
+
 var openSetup = function () {
   if (!isSetupOpened()) {
     elSetup.classList.remove('hidden');
@@ -113,6 +117,7 @@ var openSetup = function () {
     document.addEventListener('keydown', documentKeydownHandler);
     elSetupForm.addEventListener('submit', setupFormSubmitHandler);
     elSetupWizardCoat.addEventListener('click', setupWizardCoatClickHandler);
+    elSetupWizardEyes.addEventListener('click', setupWizardEyesClickHandler);
   }
 };
 
@@ -125,6 +130,7 @@ var closeSetup = function () {
     document.removeEventListener('keydown', documentKeydownHandler);
     elSetupForm.removeEventListener('submit', setupFormSubmitHandler);
     elSetupWizardCoat.removeEventListener('click', setupWizardCoatClickHandler);
+    elSetupWizardEyes.removeEventListener('click', setupWizardEyesClickHandler);
   }
 };
 
@@ -139,6 +145,7 @@ var isUserNameInput = function (el) {
 var elSetup = document.querySelector('.setup');
 var elSetupWizard = elSetup.querySelector('.setup-wizard');
 var elSetupWizardCoat = elSetupWizard.querySelector('.wizard-coat');
+var elSetupWizardEyes = elSetupWizard.querySelector('.wizard-eyes');
 var elSetupOpen = document.querySelector('.setup-open');
 var elSetupClose = elSetup.querySelector('.setup-close');
 var elSetupOpenIcon = elSetupOpen.querySelector('.setup-open-icon');
