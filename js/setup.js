@@ -1,23 +1,19 @@
 'use strict';
 
-var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Юлия', 'Виктор', 'Люпита', 'Вашингтон'];
-var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var coatColors = [
+var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Юлия', 'Виктор', 'Люпита', 'Вашингтон'];
+var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var COAT_COLORS = [
   'rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)',
   'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'
 ];
-var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
-
-var elSetup = document.querySelector('.setup');
-var elSetupSimilar = elSetup.querySelector('.setup-similar');
-var elSetupSimilarList = elSetupSimilar.querySelector('.setup-similar-list');
-var elCharacterTemplate = document.querySelector('#similar-wizard-template').content;
+var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var CHARACTERS_COUNT = 4;
 
 var generateCharacter = function () {
   return {
-    name: getRandomValue(names) + ' ' + getRandomValue(surnames),
-    coatColor: getRandomValue(coatColors),
-    eyesColor: getRandomValue(eyesColors)
+    name: getRandomValue(NAMES) + ' ' + getRandomValue(SURNAMES),
+    coatColor: getRandomValue(COAT_COLORS),
+    eyesColor: getRandomValue(EYES_COLORS)
   };
 };
 
@@ -70,7 +66,11 @@ var insertElCharacters = function (arr) {
   elSetupSimilarList.appendChild(fragment);
 };
 
-var characters = generateCharacters(4);
+var elSetup = document.querySelector('.setup');
+var elSetupSimilar = elSetup.querySelector('.setup-similar');
+var elSetupSimilarList = elSetupSimilar.querySelector('.setup-similar-list');
+var elCharacterTemplate = document.querySelector('#similar-wizard-template').content;
+var characters = generateCharacters(CHARACTERS_COUNT);
 var elCharacters = createElCharacters(characters);
 
 elSetup.classList.remove('hidden');
