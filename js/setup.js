@@ -97,8 +97,8 @@ var documentKeydownHandler = function (e) {
   }
 };
 
-var setupFormSubmitHandler = function (e) {
-  e.preventDefault();
+var setupFormSubmitHandler = function () {
+  // Обработчик я добавила, но отправка формы работает и без него.
 };
 
 var setupWizardCoatClickHandler = function () {
