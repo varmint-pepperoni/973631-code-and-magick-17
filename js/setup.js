@@ -66,13 +66,81 @@ var insertElCharacters = function (arr) {
   elSetupSimilarList.appendChild(fragment);
 };
 
+var setupOpenClickHandler = function () {
+  openSetup();
+};
+
+var setupCloseClickHandler = function () {
+  closeSetup();
+};
+
+var setupCloseKeydownHandler = function (e) {
+  if (e.keyCode === 13) {
+    closeSetup();
+  }
+};
+
+var setupOpenIconKeydownHandler = function (e) {
+  if (e.keyCode === 13) {
+    openSetup();
+  }
+};
+
+var documentKeydownHandler = function (e) {
+  if (e.keyCode === 27) {
+    if (!isUserNameInput(e.target)) {
+      closeSetup();
+    }
+  }
+};
+
+var setupFormSubmitHandler = function (e) {
+  e.preventDefault();
+};
+
+var openSetup = function () {
+  if (!isSetupOpened()) {
+    elSetup.classList.remove('hidden');
+
+    elSetupClose.addEventListener('click', setupCloseClickHandler);
+    elSetupClose.addEventListener('keydown', setupCloseKeydownHandler);
+    document.addEventListener('keydown', documentKeydownHandler);
+    elSetupForm.addEventListener('submit', setupFormSubmitHandler);
+  }
+};
+
+var closeSetup = function () {
+  if (isSetupOpened()) {
+    elSetup.classList.add('hidden');
+
+    elSetupClose.removeEventListener('click', setupCloseClickHandler);
+    elSetupClose.removeEventListener('keydown', setupCloseKeydownHandler);
+    document.removeEventListener('keydown', documentKeydownHandler);
+    elSetupForm.removeEventListener('submit', setupFormSubmitHandler);
+  }
+};
+
+var isSetupOpened = function () {
+  return !elSetup.classList.contains('hidden');
+};
+
+var isUserNameInput = function (el) {
+  return el.classList.contains('setup-user-name');
+};
+
 var elSetup = document.querySelector('.setup');
+var elSetupOpen = document.querySelector('.setup-open');
+var elSetupClose = elSetup.querySelector('.setup-close');
+var elSetupOpenIcon = elSetupOpen.querySelector('.setup-open-icon');
 var elSetupSimilar = elSetup.querySelector('.setup-similar');
+var elSetupForm = elSetup.querySelector('.setup-wizard-form');
 var elSetupSimilarList = elSetupSimilar.querySelector('.setup-similar-list');
 var elCharacterTemplate = document.querySelector('#similar-wizard-template').content;
 var characters = generateCharacters(CHARACTERS_COUNT);
 var elCharacters = createElCharacters(characters);
 
-elSetup.classList.remove('hidden');
 insertElCharacters(elCharacters);
 elSetupSimilar.classList.remove('hidden');
+
+elSetupOpen.addEventListener('click', setupOpenClickHandler);
+elSetupOpenIcon.addEventListener('keydown', setupOpenIconKeydownHandler);
