@@ -11,9 +11,9 @@ var CHARACTERS_COUNT = 4;
 
 var generateCharacter = function () {
   return {
-    name: getRandomValue(NAMES) + ' ' + getRandomValue(SURNAMES),
-    coatColor: getRandomValue(COAT_COLORS),
-    eyesColor: getRandomValue(EYES_COLORS)
+    name: getRandomArrValue(NAMES) + ' ' + getRandomArrValue(SURNAMES),
+    coatColor: getRandomArrValue(COAT_COLORS),
+    eyesColor: getRandomArrValue(EYES_COLORS)
   };
 };
 
@@ -27,10 +27,12 @@ var generateCharacters = function (count) {
   return characters;
 };
 
-var getRandomValue = function (arr) {
-  var index = Math.round(Math.random() * (arr.length - 1));
+function getRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min + 1;
+}
 
-  return arr[index];
+var getRandomArrValue = function (arr) {
+  return arr[getRandomNum(0, arr.length - 1)];
 };
 
 var createElCharacter = function (data) {
@@ -98,6 +100,10 @@ var setupFormSubmitHandler = function (e) {
   e.preventDefault();
 };
 
+var setupWizardCoatClickHandler = function () {
+  elSetupWizardCoat.style.fill = getRandomArrValue(COAT_COLORS);
+};
+
 var openSetup = function () {
   if (!isSetupOpened()) {
     elSetup.classList.remove('hidden');
@@ -106,6 +112,7 @@ var openSetup = function () {
     elSetupClose.addEventListener('keydown', setupCloseKeydownHandler);
     document.addEventListener('keydown', documentKeydownHandler);
     elSetupForm.addEventListener('submit', setupFormSubmitHandler);
+    elSetupWizardCoat.addEventListener('click', setupWizardCoatClickHandler);
   }
 };
 
@@ -117,6 +124,7 @@ var closeSetup = function () {
     elSetupClose.removeEventListener('keydown', setupCloseKeydownHandler);
     document.removeEventListener('keydown', documentKeydownHandler);
     elSetupForm.removeEventListener('submit', setupFormSubmitHandler);
+    elSetupWizardCoat.removeEventListener('click', setupWizardCoatClickHandler);
   }
 };
 
@@ -129,6 +137,8 @@ var isUserNameInput = function (el) {
 };
 
 var elSetup = document.querySelector('.setup');
+var elSetupWizard = elSetup.querySelector('.setup-wizard');
+var elSetupWizardCoat = elSetupWizard.querySelector('.wizard-coat');
 var elSetupOpen = document.querySelector('.setup-open');
 var elSetupClose = elSetup.querySelector('.setup-close');
 var elSetupOpenIcon = elSetupOpen.querySelector('.setup-open-icon');
