@@ -97,10 +97,6 @@ var documentKeydownHandler = function (e) {
   }
 };
 
-var setupFormSubmitHandler = function () {
-  // Обработчик я добавила, но отправка формы работает и без него.
-};
-
 var setupWizardCoatClickHandler = function () {
   var color = getRandomArrValue(COAT_COLORS);
 
@@ -129,7 +125,6 @@ var openSetup = function () {
     elSetupClose.addEventListener('click', setupCloseClickHandler);
     elSetupClose.addEventListener('keydown', setupCloseKeydownHandler);
     document.addEventListener('keydown', documentKeydownHandler);
-    elSetupForm.addEventListener('submit', setupFormSubmitHandler);
     elSetupWizardCoat.addEventListener('click', setupWizardCoatClickHandler);
     elSetupWizardEyes.addEventListener('click', setupWizardEyesClickHandler);
     elSetupWizardFireball.addEventListener('click', setupWizardFireballClickHandler);
@@ -143,7 +138,6 @@ var closeSetup = function () {
     elSetupClose.removeEventListener('click', setupCloseClickHandler);
     elSetupClose.removeEventListener('keydown', setupCloseKeydownHandler);
     document.removeEventListener('keydown', documentKeydownHandler);
-    elSetupForm.removeEventListener('submit', setupFormSubmitHandler);
     elSetupWizardCoat.removeEventListener('click', setupWizardCoatClickHandler);
     elSetupWizardEyes.removeEventListener('click', setupWizardEyesClickHandler);
     elSetupWizardFireball.removeEventListener('click', setupWizardFireballClickHandler);
