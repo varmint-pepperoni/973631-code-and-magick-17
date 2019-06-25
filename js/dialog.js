@@ -5,8 +5,8 @@
     e.preventDefault();
 
     lastCoords = {
-      x: e.clientX,
-      y: e.clientY
+      x: e.pageX,
+      y: e.pageY
     };
 
     document.addEventListener('mousemove', documentMousemoveHandler);
@@ -16,22 +16,22 @@
   var documentMousemoveHandler = function (e) {
     e.preventDefault();
 
-    var shift = {
-      x: lastCoords.x - e.clientX,
-      y: lastCoords.y - e.clientY
+    var shiftCoords = {
+      x: lastCoords.x - e.pageX,
+      y: lastCoords.y - e.pageY
     };
 
-    if (shift.x || shift.y) {
+    if (shiftCoords.x || shiftCoords.y) {
       isMoving = true;
     }
 
     lastCoords = {
-      x: e.clientX,
-      y: e.clientY
+      x: e.pageX,
+      y: e.pageY
     };
 
-    elSetup.style.top = (elSetup.offsetTop - shift.y) + 'px';
-    elSetup.style.left = (elSetup.offsetLeft - shift.x) + 'px';
+    elSetup.style.top = (elSetup.offsetTop - shiftCoords.y) + 'px';
+    elSetup.style.left = (elSetup.offsetLeft - shiftCoords.x) + 'px';
   };
 
   var documentMouseupHandler = function (e) {
