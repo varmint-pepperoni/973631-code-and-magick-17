@@ -135,6 +135,8 @@
   var closeSetup = function () {
     if (isSetupOpened()) {
       elSetup.classList.add('hidden');
+      elSetup.style.top = '';
+      elSetup.style.left = '';
 
       elSetupClose.removeEventListener('click', setupCloseClickHandler);
       elSetupClose.removeEventListener('keydown', setupCloseKeydownHandler);
