@@ -25,14 +25,17 @@
 
   var drawColumn = function (ctx, index, name, time, height) {
     var columnOuterWidth = CHART_COLUMN_WIDTH + CHART_COLUMN_OFFSET;
-    var chartOffsetLeft = STATISTICS_OFFSET_LEFT + 50;
-    var chartOffsetBottom = STATISTICS_OFFSET_TOP + 20;
+    var chartOffsetLeftWithoutStatisticsOffsetLeft = 50;
+    var chartOffsetLeft = STATISTICS_OFFSET_LEFT + chartOffsetLeftWithoutStatisticsOffsetLeft;
+    var chartOffsetBottomWithoutStatisticsOffsetTop = 20;
+    var chartOffsetBottom = STATISTICS_OFFSET_TOP + chartOffsetBottomWithoutStatisticsOffsetTop;
     var x = chartOffsetLeft + columnOuterWidth * index;
     var y = STATISTICS_HEIGHT - chartOffsetBottom - height;
     var timeYOffset = 5;
     var timeY = y - timeYOffset;
     var nameY = STATISTICS_HEIGHT - (chartOffsetBottom - LINE_HEIGHT);
-    var saturate = Math.round(Math.random() * 100);
+    var justOneHundredPerсent = 100;
+    var saturate = Math.round(Math.random() * justOneHundredPerсent);
     var randomColor = 'hsl(240, ' + saturate + '%, 50%)';
 
     ctx.fillStyle = (name === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
