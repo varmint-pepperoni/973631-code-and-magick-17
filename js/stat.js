@@ -7,6 +7,8 @@
   var STATISTICS_HEIGHT = 270;
   var LINE_HEIGHT = 20;
   var CHART_HEIGHT = 150;
+  var CHART_COLUMN_WIDTH = 40;
+  var CHART_COLUMN_OFFSET = 50;
 
   var getMaxOfArray = function (arr) {
     return Math.max.apply(null, arr);
@@ -22,9 +24,7 @@
   };
 
   var drawColumn = function (ctx, index, name, time, height) {
-    var columnWidth = 40;
-    var columnOffset = 50;
-    var columnOuterWidth = columnWidth + columnOffset;
+    var columnOuterWidth = CHART_COLUMN_WIDTH + CHART_COLUMN_OFFSET;
     var chartOffsetLeft = STATISTICS_OFFSET_LEFT + 50;
     var chartOffsetBottom = STATISTICS_OFFSET_TOP + 20;
     var x = chartOffsetLeft + columnOuterWidth * index;
@@ -35,7 +35,7 @@
     var randomColor = 'hsl(240, ' + saturate + '%, 50%)';
 
     ctx.fillStyle = (name === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
-    ctx.fillRect(x, y, columnWidth, height);
+    ctx.fillRect(x, y, CHART_COLUMN_WIDTH, height);
 
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
     ctx.fillText(Math.round(time), x, timeY, columnOuterWidth);
