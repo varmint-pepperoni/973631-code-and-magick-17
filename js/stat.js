@@ -34,8 +34,8 @@
     var timeYOffset = 5;
     var timeY = y - timeYOffset;
     var nameY = STATISTICS_HEIGHT - (chartOffsetBottom - LINE_HEIGHT);
-    var justOneHundredPersents = 100;
-    var saturate = Math.round(Math.random() * justOneHundredPersents);
+    var justOneHundredPerсent = 100;
+    var saturate = Math.round(Math.random() * justOneHundredPerсent);
     var randomColor = 'hsl(240, ' + saturate + '%, 50%)';
 
     ctx.fillStyle = (name === 'Вы') ? 'rgba(255, 0, 0, 1)' : randomColor;
