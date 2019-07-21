@@ -16,9 +16,9 @@
     var maxTime = getMaxOfArray(times);
     var proportion = CHART_HEIGHT / maxTime;
 
-    for (var i = 0; i < names.length; i++) {
-      drawColumn(ctx, i, names[i], times[i], times[i] * proportion);
-    }
+    names.forEach(function (name, i) {
+      drawColumn(ctx, i, name, times[i], times[i] * proportion);
+    });
   };
 
   var drawColumn = function (ctx, index, name, time, height) {
