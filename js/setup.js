@@ -79,19 +79,19 @@
   };
 
   var setupCloseKeydownHandler = function (e) {
-    if (window.keyboard.isEnterPressed(e)) {
+    if (window.keyboardPress.isEnter(e)) {
       closeSetup();
     }
   };
 
   var setupOpenIconKeydownHandler = function (e) {
-    if (window.keyboard.isEnterPressed(e)) {
+    if (window.keyboardPress.isEnter(e)) {
       openSetup();
     }
   };
 
   var documentKeydownHandler = function (e) {
-    if (window.keyboard.isEscPressed(e)) {
+    if (window.keyboardPress.isEsc(e)) {
       if (!isUserNameInput(e.target)) {
         closeSetup();
       }
@@ -177,18 +177,4 @@
 
   elSetupOpen.addEventListener('click', setupOpenClickHandler);
   elSetupOpenIcon.addEventListener('keydown', setupOpenIconKeydownHandler);
-})();
-
-(function () {
-  var ENTER_KEYCODE = 13;
-  var ESC_KEYCODE = 27;
-
-  window.keyboard = {
-    isEnterPressed: function (evt) {
-      return evt.keyCode === ENTER_KEYCODE;
-    },
-    isEscPressed: function (evt) {
-      return evt.keyCode === ESC_KEYCODE;
-    }
-  };
 })();
