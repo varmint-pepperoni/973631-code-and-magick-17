@@ -29,7 +29,8 @@
     var chartOffsetBottom = STATISTICS_OFFSET_TOP + 20;
     var x = chartOffsetLeft + columnOuterWidth * index;
     var y = STATISTICS_HEIGHT - chartOffsetBottom - height;
-    var timeY = y - 5;
+    var timeYOffset = 5;
+    var timeY = y - timeYOffset;
     var nameY = STATISTICS_HEIGHT - (chartOffsetBottom - LINE_HEIGHT);
     var saturate = Math.round(Math.random() * 100);
     var randomColor = 'hsl(240, ' + saturate + '%, 50%)';
