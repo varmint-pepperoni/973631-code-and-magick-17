@@ -6,15 +6,15 @@
   var STATISTICS_WIDTH = 420;
   var STATISTICS_HEIGHT = 270;
   var LINE_HEIGHT = 20;
+  var CHART_HEIGHT = 150;
 
   var getMaxOfArray = function (arr) {
     return Math.max.apply(null, arr);
   };
 
   var drawColumns = function (ctx, names, times) {
-    var chartHeight = 150;
     var maxTime = getMaxOfArray(times);
-    var proportion = chartHeight / maxTime;
+    var proportion = CHART_HEIGHT / maxTime;
 
     for (var i = 0; i < names.length; i++) {
       drawColumn(ctx, i, names[i], times[i], times[i] * proportion);
