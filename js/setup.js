@@ -1,8 +1,6 @@
 'use strict';
 
 (function () {
-  var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Юлия', 'Виктор', 'Люпита', 'Вашингтон'];
-  var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var COAT_COLORS = [
     'rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)',
     'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'
@@ -11,27 +9,9 @@
   var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var CHARACTERS_COUNT = 4;
 
-  var generateCharacter = function () {
-    return {
-      name: getRandomArrValue(NAMES) + ' ' + getRandomArrValue(SURNAMES),
-      coatColor: getRandomArrValue(COAT_COLORS),
-      eyesColor: getRandomArrValue(EYES_COLORS)
-    };
-  };
-
-  var generateCharacters = function (count) {
-    var characters = [];
-
-    for (var i = 0; i < count; i++) {
-      characters[i] = generateCharacter();
-    }
-
-    return characters;
-  };
-
-  function getRandomNum(min, max) {
+  var getRandomNum = function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min + 1;
-  }
+  };
 
   var getRandomArrValue = function (arr) {
     return arr[getRandomNum(0, arr.length - 1)];
@@ -44,8 +24,8 @@
     var elEyes = elCharacter.querySelector('.wizard-eyes');
 
     elName.textContent = data.name;
-    elCoat.setAttribute('fill', data.coatColor);
-    elEyes.setAttribute('fill', data.eyesColor);
+    elCoat.setAttribute('fill', data.colorCoat);
+    elEyes.setAttribute('fill', data.colorEyes);
 
     return elCharacter;
   };
@@ -119,6 +99,14 @@
     elSetupWizardFireballInput.value = color;
   };
 
+  var setupWizardFormSubmitHandler = function (e) {
+    var formData = new FormData(e.target);
+
+    e.preventDefault();
+
+    window.backend.save(formData, successFormSaveHandler, ajaxErrorHandler);
+  };
+
   var openSetup = function () {
     if (!isSetupOpened()) {
       elSetup.classList.remove('hidden');
@@ -129,6 +117,7 @@
       elSetupWizardCoat.addEventListener('click', setupWizardCoatClickHandler);
       elSetupWizardEyes.addEventListener('click', setupWizardEyesClickHandler);
       elSetupWizardFireball.addEventListener('click', setupWizardFireballClickHandler);
+      elSetupWizardForm.addEventListener('submit', setupWizardFormSubmitHandler);
     }
   };
 
@@ -144,6 +133,7 @@
       elSetupWizardCoat.removeEventListener('click', setupWizardCoatClickHandler);
       elSetupWizardEyes.removeEventListener('click', setupWizardEyesClickHandler);
       elSetupWizardFireball.removeEventListener('click', setupWizardFireballClickHandler);
+      elSetupWizardForm.removeEventListener('submit', setupWizardFormSubmitHandler);
     }
   };
 
@@ -153,6 +143,33 @@
 
   var isUserNameInput = function (el) {
     return el.classList.contains('setup-user-name');
+  };
+
+  var successCharactersLoadHandler = function (characters) {
+    var elCharacters = createElCharacters(characters.slice(0, CHARACTERS_COUNT));
+
+    insertElCharacters(elCharacters);
+    elSetupSimilar.classList.remove('hidden');
+
+    elSetupOpen.addEventListener('click', setupOpenClickHandler);
+    elSetupOpenIcon.addEventListener('keydown', setupOpenIconKeydownHandler);
+  };
+
+  var successFormSaveHandler = function () {
+    closeSetup();
+  };
+
+  var ajaxErrorHandler = function (errorMessage) {
+    var node = document.createElement('div');
+
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
   };
 
   var elSetup = document.querySelector('.setup');
@@ -169,12 +186,7 @@
   var elSetupSimilar = elSetup.querySelector('.setup-similar');
   var elSetupSimilarList = elSetupSimilar.querySelector('.setup-similar-list');
   var elCharacterTemplate = document.querySelector('#similar-wizard-template').content;
-  var characters = generateCharacters(CHARACTERS_COUNT);
-  var elCharacters = createElCharacters(characters);
+  var elSetupWizardForm = elSetup.querySelector('.setup-wizard-form');
 
-  insertElCharacters(elCharacters);
-  elSetupSimilar.classList.remove('hidden');
-
-  elSetupOpen.addEventListener('click', setupOpenClickHandler);
-  elSetupOpenIcon.addEventListener('keydown', setupOpenIconKeydownHandler);
+  window.backend.load(successCharactersLoadHandler, ajaxErrorHandler);
 })();
