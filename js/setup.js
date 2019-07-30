@@ -8,6 +8,10 @@
   var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var CHARACTERS_COUNT = 4;
+  var Values = {
+    COAT: 2,
+    EYES: 1
+  };
 
   var getRandomNum = function (min, max) {
     return Math.floor(Math.random() * (max - min)) + min + 1;
@@ -195,11 +199,11 @@
     var value = 0;
 
     if (wizard.colorCoat === wizardState.colorCoat) {
-      value += 2;
+      value += Values.COAT;
     }
 
     if (wizard.colorEyes === wizardState.colorEyes) {
-      value += 1;
+      value += Values.EYES;
     }
 
     return value;
