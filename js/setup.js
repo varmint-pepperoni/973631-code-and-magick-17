@@ -8,7 +8,7 @@
   var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
   var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
   var CHARACTERS_COUNT = 4;
-  var Values = {
+  var Value = {
     COAT: 2,
     EYES: 1
   };
@@ -199,11 +199,11 @@
     var value = 0;
 
     if (wizard.colorCoat === wizardState.colorCoat) {
-      value += Values.COAT;
+      value += Value.COAT;
     }
 
     if (wizard.colorEyes === wizardState.colorEyes) {
-      value += Values.EYES;
+      value += Value.EYES;
     }
 
     return value;
